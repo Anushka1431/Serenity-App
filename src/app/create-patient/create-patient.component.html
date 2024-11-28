@@ -1,0 +1,74 @@
+
+
+<div class="container">
+  <mat-card class="add-patient-card">
+    <mat-card-header>
+      <mat-card-title>Add New Patient</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <form [formGroup]="patientForm" (ngSubmit)="onSubmit()">
+        <mat-form-field class="example-full-width">
+          <mat-label>First Name</mat-label>
+          <input matInput type="text" formControlName="fname" placeholder="Enter First Name" maxlength="20">
+          <mat-error *ngIf="patientForm.get('fname')?.hasError('required')">First name is required</mat-error>
+          <mat-error *ngIf="patientForm.get('fname')?.hasError('maxlength')">First name cannot exceed 20 characters</mat-error>
+          <mat-error *ngIf="patientForm.get('fname')?.hasError('pattern')">First name cannot contain numbers</mat-error>
+        </mat-form-field>
+        <br>
+        <mat-form-field class="example-full-width">
+          <mat-label>Last Name</mat-label>
+          <input matInput type="text" formControlName="lname" placeholder="Enter Last Name" maxlength="20">
+          <mat-error *ngIf="patientForm.get('lname')?.hasError('required')">Last name is required</mat-error>
+          <mat-error *ngIf="patientForm.get('lname')?.hasError('maxlength')">Last name cannot exceed 20 characters</mat-error>
+          <mat-error *ngIf="patientForm.get('lname')?.hasError('pattern')">Last name cannot contain numbers</mat-error>
+        </mat-form-field>
+        <br>
+        <mat-form-field class="example-full-width">
+          <mat-label>Gender</mat-label>
+          <mat-select formControlName="gender">
+            <mat-option value="male">Male</mat-option>
+            <mat-option value="female">Female</mat-option>
+            <mat-option value="other">Other</mat-option>
+          </mat-select>
+          <mat-error *ngIf="patientForm.get('gender')?.hasError('required')">Gender is required</mat-error>
+        </mat-form-field>
+        <br>
+        <mat-form-field class="example-full-width">
+          <mat-label>Date of Birth</mat-label>
+          <input matInput [matDatepicker]="picker" formControlName="dateOfBirth" placeholder="Enter Date of Birth">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+          <mat-error *ngIf="patientForm.get('dateOfBirth')?.hasError('required')">Date of Birth is required</mat-error>
+          <mat-error *ngIf="patientForm.get('dateOfBirth')?.hasError('max')">Date of Birth cannot be in the future</mat-error>
+        </mat-form-field>
+        <br>
+        <mat-form-field class="example-full-width">
+          <mat-label>Blood Group</mat-label>
+          <mat-select formControlName="bloodgroup">
+            <mat-option value="A+">A+</mat-option>
+            <mat-option value="A-">A-</mat-option>
+            <mat-option value="B+">B+</mat-option>
+            <mat-option value="B-">B-</mat-option>
+            <mat-option value="AB+">AB+</mat-option>
+            <mat-option value="AB-">AB-</mat-option>
+            <mat-option value="O+">O+</mat-option>
+            <mat-option value="O-">O-</mat-option>
+          </mat-select>
+          <mat-error *ngIf="patientForm.get('bloodgroup')?.hasError('required')">Blood group is required</mat-error>
+        </mat-form-field>
+        <br>
+        <mat-form-field class="example-full-width">
+          <mat-label>Contact</mat-label>
+          <input matInput type="text" formControlName="contact" placeholder="Enter Contact" maxlength="10">
+          <mat-error *ngIf="patientForm.get('contact')?.hasError('required')">Contact is required</mat-error>
+          <mat-error *ngIf="patientForm.get('contact')?.hasError('pattern')">Contact must be a 10-digit number</mat-error>
+        </mat-form-field>
+        <br>
+        <div class="button-group">
+          <button mat-stroked-button class="cancel-button" (click)="goToPatientList()">Cancel</button>
+          <button mat-raised-button class="submit-button" type="submit" [disabled]="!patientForm.valid">Submit</button>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

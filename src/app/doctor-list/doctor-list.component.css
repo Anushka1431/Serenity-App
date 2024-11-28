@@ -1,0 +1,56 @@
+:root {
+  --maincolor: #f545c9;
+  --secondcolor: #f8a803;
+  --thirdcolor: #f4ab01;
+  --textcolor: #4A5764;
+}
+
+.custom-button {
+  background-color: #f545c9!important;
+  color: white !important;
+}
+
+.button-group {
+  display: flex;
+  gap: 10px; 
+  vertical-align: center;
+}
+
+.custom-fab-button {
+  width: 45px;
+  height: 45px;
+  border-radius: 20px !important;
+  background-color: white;
+  padding: 10px;
+  color: black;
+}
+
+.mat-icon {
+  margin-right: 4px;
+}
+
+.search-and-buttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.full-width-table {
+  width: 100%;
+}
+
+.mat-header-cell, .mat-cell {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+}
+
+.actions-cell {
+  display: flex;
+  justify-content: space-around;
+}
+.button-class{
+  margin-right:10px
+}

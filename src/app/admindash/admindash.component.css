@@ -1,0 +1,134 @@
+:root {
+  --maincolor: #f545c9;
+  --secondcolor: #f8a803;
+  --textcolor: white;
+  --bgcolor: white;
+}
+
+.sidenav-container {
+  height: 100%;
+}
+
+.sidenav {
+  width: 250px;
+}
+
+.mat-toolbar {
+  background-color: var(--bgcolor) !important;
+  color: var(--maincolor) !important;
+}
+
+.nav-item {
+  color: var(--textcolor);
+  display: flex;
+  align-items: center;
+}
+
+.nav-item:hover {
+  background-color: var(--secondcolor);
+}
+
+.mat-icon {
+  vertical-align: middle;
+  margin-right: 8px;
+}
+
+.link-text {
+  vertical-align: middle;
+  font-size: 18px;
+}
+
+.welcome-message h1 {
+  color: var(--maincolor);
+  text-align: center;
+  margin: 16px 0;
+}
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  grid-template-rows: auto auto;
+  grid-gap: 10px;
+  padding: 20px;
+  background-color: white;
+}
+
+.appointments-chart {
+  grid-column: 1 / 2;
+  grid-row: 1 / 3;
+}
+
+.number-cards-container {
+  display: flex;
+  justify-content: space-around;
+  grid-column: 2 / 3;
+  grid-row: 1 / 2;
+}
+
+.number-card {
+  width: 45%;
+  text-align: center;
+  height: 100px;
+  border: 2px solid var(--maincolor);
+  box-shadow: 0 0 15px rgba(245, 69, 201, 0.5);
+  transition: transform 0.3s;
+}
+
+.number-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(245, 69, 201, 0.7);
+}
+
+.patients-chart {
+  grid-column: 2 / 3;
+  grid-row: 2 / 3;
+}
+
+.mat-card-title {
+  color: #f545c9;
+}
+
+ngx-charts-line-chart .line-series path {
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.4));
+}
+
+mat-sidenav-content {
+  background-color: white;
+}
+
+.button-container {
+  display: flex;
+  gap: 20px;
+  padding: 15px;
+}
+
+.custom-fab-button {
+  width: 50px;
+  height: 50px;
+  border-radius: 12px !important;
+  background-color: white;
+  padding-left: 10px;
+  
+  color: black;
+}
+
+.mat-icon {
+  font-size: 24px;
+}
+
+.mat-menu-panel {
+  min-width: 150px;
+}
+
+.date-range-picker {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0px;
+  margin-left: 100px; 
+}
+
+.date-range-picker .date-picker {
+  width: 550px;
+  margin-right: 16px;
+}

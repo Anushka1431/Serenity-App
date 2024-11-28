@@ -1,0 +1,40 @@
+<div class="container">
+  <h2>Diagnosis for Appointment ID: {{appointmentID}}</h2>
+  
+  <mat-card *ngIf="patient" >
+    <mat-card-header>
+      <div mat-card-avatar class="example-header-image"></div>
+      <mat-card-title>{{ patient.fname }} {{ patient.lname }}</mat-card-title>
+      <mat-card-subtitle>Contact: {{ patient.contact }} | DOB: {{ patient.dateOfBirth | date: 'mediumDate' }} | Gender:{{ patient.gender }} | BloodGrp: {{patient.bloodgroup}}</mat-card-subtitle>
+      
+    </mat-card-header>
+    
+  </mat-card>
+  <br>
+  
+  <form (ngSubmit)="onSubmit()">
+    <mat-form-field class="example-full-width">
+      <mat-label>Diagnosis</mat-label>
+      <textarea matInput type="text" [(ngModel)]="medicalRecord.diagnosis" name="diagnosis" required rows="3"></textarea>
+    </mat-form-field>
+    <br>
+    <mat-form-field class="example-full-width">
+      <mat-label>Medications</mat-label>
+      <textarea matInput type="text" [(ngModel)]="medicalRecord.medications" name="medications" rows="3"></textarea>
+    </mat-form-field>
+    <br>
+    <mat-form-field class="example-full-width">
+      <mat-label>Doctor's Remarks</mat-label>
+      <textarea matInput [(ngModel)]="medicalRecord.treatment" name="treatment" rows="5"></textarea>
+    </mat-form-field>
+    <br>
+    <mat-form-field class="example-full-width">
+      <mat-label>Payment</mat-label>
+      <input matInput type="number" [(ngModel)]="medicalRecord.payment" name="payment" required>
+    </mat-form-field>
+    <br>
+    <button mat-raised-button style="color:#f545c9" type="submit">Submit</button>
+  </form>
+</div>
+
+  

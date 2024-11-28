@@ -1,0 +1,98 @@
+<mat-sidenav-container class="sidenav-container" id="dashboard-content">
+  <mat-sidenav mode="side" opened class="sidenav">
+    <mat-toolbar style="background-color: white; color: #f545c9;">Admin Dashboard</mat-toolbar>
+    <mat-nav-list>
+      <a mat-list-item routerLink="/patientlist" class="nav-item">
+        <mat-icon class="icon">person</mat-icon>
+        <span class="link-text">Patients</span>
+      </a>
+      <a mat-list-item routerLink="/doctorlist" class="nav-item">
+        <mat-icon class="icon">person</mat-icon>
+        <span class="link-text">Doctors</span>
+      </a>
+      <a mat-list-item routerLink="/admin-appointment-list" class="nav-item">
+        <mat-icon class="icon">event</mat-icon>
+        <span class="link-text">Appointments</span>
+      </a>
+    </mat-nav-list>
+    <div class="button-container">
+      <button mat-fab class="custom-fab-button" (click)="downloadPdf()">
+        <mat-icon>picture_as_pdf</mat-icon>
+      </button>
+      <button mat-fab class="custom-fab-button" (click)="downloadExcel()">
+        <mat-icon>file_download</mat-icon>
+      </button>
+    </div>
+  </mat-sidenav>
+  <mat-sidenav-content id="right-dash-content">
+    <div class="welcome-message">
+      <h1>Welcome Admin</h1>
+    </div>
+    <!-- Date Range Picker -->
+    <div class="date-range-picker">
+      <mat-form-field class="date-picker"appearance="fill">
+        <mat-label>Select Date Range</mat-label>
+        <mat-date-range-input  [formGroup]="dateRangeForm" [rangePicker]="picker">
+          <input matStartDate formControlName="start">
+          <input matEndDate formControlName="end">
+        </mat-date-range-input>
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-date-range-picker #picker></mat-date-range-picker>
+      </mat-form-field>
+      <button mat-raised-button style="color:#f545c9" (click)="applyDateRange()">Apply</button>
+    </div>
+    <div class="dashboard-grid">
+      <!-- Appointments Graph -->
+      <div class="chart appointments-chart">
+        <ngx-charts-line-chart
+          [view]="[700, 500]"
+          [scheme]="colorScheme"
+          [results]="appointments"
+          [gradient]="gradient"
+          [xAxis]="showXAxis"
+          [yAxis]="showYAxis"
+          [showXAxisLabel]="showXAxisLabel"
+          [showYAxisLabel]="showYAxisLabel"
+          [xAxisLabel]="'Date'"
+          [yAxisLabel]="'Number of Appointments'">
+        </ngx-charts-line-chart>
+      </div>
+
+      <!-- Income Cards -->
+      <div class="number-cards-container">
+        <mat-card class="number-card">
+          <mat-card-header>
+            <mat-card-title>Total Income</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <h2>{{ totalIncome | currency }}</h2>
+          </mat-card-content>
+        </mat-card>
+        <mat-card class="number-card">
+          <mat-card-header>
+            <mat-card-title>Today's Income</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <h2>{{ todayIncome | currency }}</h2>
+          </mat-card-content>
+        </mat-card>
+      </div>
+
+      <!-- Patients Graph -->
+      <div class="chart patients-chart">
+        <ngx-charts-bar-vertical
+          [view]="[450, 350]"
+          [scheme]="colorScheme"
+          [results]="patients"
+          [gradient]="gradient"
+          [xAxis]="showXAxis"
+          [yAxis]="showYAxis"
+          [showXAxisLabel]="showXAxisLabel"
+          [showYAxisLabel]="showYAxisLabel"
+          [xAxisLabel]="'Date'"
+          [yAxisLabel]="'Number of Patients'">
+        </ngx-charts-bar-vertical>
+      </div>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

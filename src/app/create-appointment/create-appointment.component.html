@@ -1,0 +1,60 @@
+<div class="container">
+  <mat-card class="add-appointment-card">
+    <mat-card-header>
+      <mat-card-title>Add New Appointment</mat-card-title>
+    </mat-card-header>
+    <br>
+    <mat-card-content>
+      <form [formGroup]="appointmentForm" (ngSubmit)="onSubmit()">
+        <mat-form-field class="full-width">
+          <mat-label>Patient</mat-label>
+          <mat-select formControlName="patientID" required>
+            <mat-option *ngFor="let patient of patients" [value]="patient.patientID">
+              {{ patient.fname }} {{ patient.lname }}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="appointmentForm.get('patientID')?.hasError('required')">Patient is required</mat-error>
+        </mat-form-field>
+        <br>
+        <mat-form-field class="full-width">
+          <mat-label>Doctor</mat-label>
+          <mat-select formControlName="doctorID" required>
+            <mat-option *ngFor="let doctor of doctors" [value]="doctor.doctorID">
+              {{ doctor.name }}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="appointmentForm.get('doctorID')?.hasError('required')">Doctor is required</mat-error>
+        </mat-form-field>
+        <br>
+        <mat-form-field class="full-width">
+          <mat-label>Appointment Date</mat-label>
+          <input matInput [matDatepicker]="picker" formControlName="appointmentDate" (dateChange)="onDateChange($event)" required>
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+          <mat-error *ngIf="appointmentForm.get('appointmentDate')?.hasError('required')">Appointment date is required</mat-error>
+          <mat-error *ngIf="appointmentForm.get('appointmentDate')?.hasError('min')">Appointment date cannot be in the past</mat-error>
+        </mat-form-field>
+        <br>
+        <div class="form-group-full-width">
+          <label>Appointment Time</label>
+          <div class="time-slot-container">
+            <button mat-stroked-button type="button" *ngFor="let slot of timeSlots" 
+                    [disabled]="slot.booked"
+                    style="color:#f545c9;"
+                    [color]="slot.booked ? 'warn' : 'primary'" 
+                    (click)="selectTimeSlot(slot)"
+                    [class.selected]="slot === selectedTimeSlot">
+                    {{ slot.displayTime }}
+            </button>
+          </div>
+          <mat-error *ngIf="appointmentForm.get('appointmentTime')?.hasError('required')">Appointment time is required</mat-error>
+        </div>
+        <br>
+        <div class="button-group">
+          <button mat-stroked-button class="cancel-button" (click)="goToAppointmentList()">Cancel</button>
+          <button mat-raised-button class="submit-button" type="submit" [disabled]="!appointmentForm.valid">Submit</button>
+        </div>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

@@ -1,0 +1,76 @@
+
+<nav style="margin:auto" class="navbar navbar-expand-lg bg-light">
+  <button mat-icon-button (click)="goBack()">
+    <mat-icon>arrow_back</mat-icon>
+  </button>
+  <div width="900px" style="font-size:30px;font-family:Georgia, 'Times New Roman', Times, serif; padding:10px;"> <font color="#f545c9">Serenity</font><font color="#000"> Hospital</font></div>
+  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  
+</nav>
+
+<div class="container">
+  <hr>
+  <h2>Patient List</h2>
+  <hr>
+  <div class="search-and-buttons "  style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+    <mat-form-field style="width: 900px;">
+      <mat-label>Search</mat-label>
+      <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Mia" #input>
+      <mat-icon matSuffix>search</mat-icon>
+    </mat-form-field>
+    <div class="button-group">
+      <button mat-fab extended class="custom-button" href="javascript:void(0);" routerLink="/create-patient">
+        <mat-icon>add</mat-icon>Add Patient
+      </button>
+      <button mat-fab class="custom-fab-button" (click)="downloadExcel()">
+        <mat-icon>file_download</mat-icon>
+      </button>
+    </div>
+  </div>
+  <div class="mat-elevation-z8">
+    <table mat-table [dataSource]="patients" matSort>
+      <ng-container matColumnDef="patientID">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Patient ID </th>
+        <td mat-cell *matCellDef="let patient"> {{ patient.patientID }} </td>
+      </ng-container>
+      <ng-container matColumnDef="fname">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> First Name </th>
+        <td mat-cell *matCellDef="let patient"> {{ patient.fname }} </td>
+      </ng-container>
+      <ng-container matColumnDef="lname">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Last Name </th>
+        <td mat-cell *matCellDef="let patient"> {{ patient.lname }} </td>
+      </ng-container>
+      <ng-container matColumnDef="gender">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Gender </th>
+        <td mat-cell *matCellDef="let patient"> {{ patient.gender }} </td>
+      </ng-container>
+      <ng-container matColumnDef="dateOfBirth">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Date of Birth </th>
+        <td mat-cell *matCellDef="let patient"> {{ patient.dateOfBirth | date:'shortDate' }} </td>
+      </ng-container>
+      <ng-container matColumnDef="bloodgroup">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Blood Group </th>
+        <td mat-cell *matCellDef="let patient"> {{ patient.bloodgroup }} </td>
+      </ng-container>
+      <ng-container matColumnDef="contact">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Contact </th>
+        <td mat-cell *matCellDef="let patient"> {{ patient.contact }} </td>
+      </ng-container>
+      <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef> Actions </th>
+        <td mat-cell *matCellDef="let patient">
+          <button mat-stroked-button style="color:#f545c9" [routerLink]="['/updatepatient', patient.patientID]">Update</button>
+        </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+      </tr>
+    </table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+  </div>
+</div>

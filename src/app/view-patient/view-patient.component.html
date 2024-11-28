@@ -1,0 +1,49 @@
+<div class="container">
+  <!-- Patient Details Card -->
+  <mat-card class="patient-card">
+    <mat-card-header>
+      <mat-card-title>Patient Details</mat-card-title>
+    </mat-card-header>
+    <br>
+    <mat-card-content>
+      <div *ngIf="patient">
+        <div class="detail-item">
+          <p><strong>Full Name:</strong> {{ patient.fname }} {{ patient.lname }}</p>
+        </div>
+        <div class="detail-item">
+          <p><strong>Contact:</strong> {{ patient.contact }}</p>
+        </div>
+        <div class="detail-item">
+          <p><strong>Date of Birth:</strong> {{ patient.dateOfBirth | date: 'mediumDate' }}</p>
+        </div>
+        <div class="detail-item">
+          <p><strong>Gender:</strong> {{ patient.gender }}</p>
+        </div>
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+  <!-- Medical Records Cards -->
+  <div *ngIf="medicalRecords.length > 0; else noRecords">
+    <h2>Medical Records</h2>
+    <mat-card *ngFor="let record of medicalRecords" class="record-card">
+      <mat-card-header>
+        <mat-card-title>{{ record.diagnosisDate | date: 'medium' }}</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>Details</mat-panel-title>
+          </mat-expansion-panel-header>
+          <p><strong>Diagnosis:</strong> {{ record.diagnosis }}</p>
+          <p><strong>Medications:</strong> {{ record.medications }}</p>
+          <p><strong>Treatment:</strong> {{ record.treatment }}</p>
+        </mat-expansion-panel>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <ng-template #noRecords>
+    <p>No medical records found for this patient.</p>
+  </ng-template>
+</div>

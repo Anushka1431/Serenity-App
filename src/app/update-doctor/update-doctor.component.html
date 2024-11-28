@@ -1,0 +1,45 @@
+<div class="container">
+    <mat-card class="update-doctor-card">
+      <mat-card-header>
+        <mat-card-title>Update Doctor</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <form [formGroup]="updateDoctorForm" (ngSubmit)="onSubmit()">
+          <mat-form-field class="full-width" appearance="fill">
+            <mat-label>Name</mat-label>
+            <input matInput formControlName="name" placeholder="Enter Name" maxlength="50">
+            <mat-error *ngIf="updateDoctorForm.get('name')?.hasError('required')">Name is required</mat-error>
+            <mat-error *ngIf="updateDoctorForm.get('name')?.hasError('maxlength')">Name cannot exceed 50 characters</mat-error>
+          </mat-form-field>
+          <mat-form-field class="full-width" appearance="fill">
+            <mat-label>Specialization</mat-label>
+            <input matInput formControlName="specialization" placeholder="Enter Specialization" maxlength="50">
+            <mat-error *ngIf="updateDoctorForm.get('specialization')?.hasError('required')">Specialization is required</mat-error>
+            <mat-error *ngIf="updateDoctorForm.get('specialization')?.hasError('maxlength')">Specialization cannot exceed 50 characters</mat-error>
+          </mat-form-field>
+          <mat-form-field class="full-width" appearance="fill">
+            <mat-label>Username</mat-label>
+            <input matInput formControlName="username" placeholder="Enter Username" maxlength="20">
+            <mat-error *ngIf="updateDoctorForm.get('username')?.hasError('required')">Username is required</mat-error>
+            <mat-error *ngIf="updateDoctorForm.get('username')?.hasError('maxlength')">Username cannot exceed 20 characters</mat-error>
+          </mat-form-field>
+          <mat-form-field class="full-width" appearance="fill">
+            <mat-label>Password</mat-label>
+            <input matInput formControlName="password" placeholder="Enter Password" maxlength="20" type="password">
+            <mat-error *ngIf="updateDoctorForm.get('password')?.hasError('maxlength')">Password cannot exceed 20 characters</mat-error>
+          </mat-form-field>
+          <mat-form-field class="full-width" appearance="fill">
+            <mat-label>Contact</mat-label>
+            <input matInput formControlName="contact" placeholder="Enter Contact" maxlength="10">
+            <mat-error *ngIf="updateDoctorForm.get('contact')?.hasError('required')">Contact is required</mat-error>
+            <mat-error *ngIf="updateDoctorForm.get('contact')?.hasError('pattern')">Contact must be a 10-digit number</mat-error>
+          </mat-form-field>
+          <div class="button-group">
+            <button mat-stroked-button class="cancel-button" (click)="goToDoctorList()">Cancel</button>
+            <button mat-raised-button class="submit-button" type="submit" [disabled]="!updateDoctorForm.valid">Submit</button>
+          </div>
+        </form>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  
